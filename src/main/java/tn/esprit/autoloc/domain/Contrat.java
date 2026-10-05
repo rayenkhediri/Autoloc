@@ -1,8 +1,12 @@
 package tn.esprit.autoloc.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,8 +20,12 @@ public class Contrat {
     private Long idContrat;
 
     private LocalDate dateSignature;
-
     private BigDecimal montantTotal;
-
     private boolean valide;
+
+    @OneToOne(fetch = FetchType.LAZY)
+     Reservation reservation;
+
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Paiement> paiements = new ArrayList<>();
 }

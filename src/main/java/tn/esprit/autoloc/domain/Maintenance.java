@@ -1,6 +1,8 @@
 package tn.esprit.autoloc.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -17,4 +19,8 @@ public class Maintenance {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private String description;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+     Vehicule vehicule;
 }

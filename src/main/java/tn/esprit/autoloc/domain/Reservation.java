@@ -1,6 +1,8 @@
 package tn.esprit.autoloc.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -16,6 +18,19 @@ public class Reservation {
 
     private LocalDate dateDebut;
     private LocalDate dateFin;
+
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+     Client client;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+     Vehicule vehicule;
+
+
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+     Contrat contrat;
 }

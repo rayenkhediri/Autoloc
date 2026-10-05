@@ -1,6 +1,8 @@
 package tn.esprit.autoloc.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 @Entity
 @Getter
 @Setter
@@ -14,6 +16,11 @@ public class Employe {
 
     private String nom;
     private String prenom;
+
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+     Agence agence;
 }
