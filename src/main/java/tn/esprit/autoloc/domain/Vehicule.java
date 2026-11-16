@@ -1,11 +1,14 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -29,14 +32,14 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     private StatutVehicule statut;
 
-
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-     Agence agence;
+    Agence agence;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-     List<Reservation> reservations= new ArrayList<>();
-
+    List<Reservation> reservations = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    List<Equipement> equipements= new ArrayList<>();
+    List<Equipement> equipements = new ArrayList<>();
 }
